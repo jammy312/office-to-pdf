@@ -1,6 +1,8 @@
-import type { NextRequest } from "next/server";
+import type { VercelRequest, VercelResponse } from '@vercel/node'
 
-export async function GET(req: NextRequest) {
-  return Response.json({message:"james"})
-  
+export default function handler(req: VercelRequest, res: VercelResponse) {
+  const { name = 'World' } = req.query
+  return res.json({
+    message: `Hello ${name}!`,
+  })
 }
