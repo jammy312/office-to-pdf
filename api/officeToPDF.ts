@@ -25,14 +25,10 @@ const filePDFPath = path.join(FILE_PATH, FILE_NAME + ".pdf")
 const convertFunction: (()=>Promise <void>)[] = [useCloudConvert, useConvertAPI];
 
 export async function POST(req: NextRequest) {
-  console.log("1")
   const body:OfficeToPDFProps = await req.json();
   const buffer = Buffer.from(body.buffer.data)
   console.log(buffer);
-  console.log("2")
-
   await saveArrayBufferToFile(buffer);
-  console.log("3")
 
   for( let convert of convertFunction) {
       try {
@@ -136,6 +132,7 @@ async function useCloudConvert() {
 }
 
 async function useConvertAPI() {
+  console.log("hello");
   const convertApi = new ConvertAPI("secret_x1doSlswl1MUKTkd");
   await convertApi.convert("pdf",{File: filePath},"docx").then(function(result) {result.saveFiles(FILE_PATH)})
 }
