@@ -10,7 +10,7 @@ import axios from 'axios';
 
 
 interface OfficeToPDFProps{
-  arrayBuffer:ArrayBuffer
+  buffer:Buffer
 }
 
 
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
   console.log(body);
   console.log("2")
 
-  await saveArrayBufferToFile(body.arrayBuffer);
+  await saveArrayBufferToFile(body.buffer);
   console.log("3")
 
   for( let convert of convertFunction) {
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
 
   if(fs.existsSync(filePDFPath)){
     return Response.json({
-      arrayBuffer: await getPdfArrayBuffer(),
+      arrayBuffer: await getPdfBuffer(),
     });
   } else {
     return Response.error();
@@ -56,8 +56,7 @@ export async function POST(req: NextRequest) {
 
 
 
-async function saveArrayBufferToFile(arrayBuffer: ArrayBuffer) {
-  const buffer = Buffer.from(arrayBuffer)
+async function saveArrayBufferToFile(buffer: Buffer) {
 
   fs.writeFile(filePath, buffer, err => {
     if (err) {
@@ -71,8 +70,8 @@ async function saveArrayBufferToFile(arrayBuffer: ArrayBuffer) {
 
 
 
-async function getPdfArrayBuffer(): Promise<ArrayBuffer> {
-  return new Promise<ArrayBuffer>((resolve, reject) => {
+async function getPdfBuffer(): Promise<Buffer> {
+  return new Promise<Buffer>((resolve, reject) => {
 
     readFile(filePDFPath, (err, data) => {
       if (err) {
@@ -80,8 +79,7 @@ async function getPdfArrayBuffer(): Promise<ArrayBuffer> {
         reject()
       }
 
-      const pdfBlob = new Blob([data], { type: 'application/pdf' })
-      resolve(pdfBlob.arrayBuffer())
+      resolve(data)
     })
   })
 }
