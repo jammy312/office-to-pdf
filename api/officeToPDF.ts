@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
           break;
         }
       } catch(err) {
-        console.log("Erreur dans la conversion:" + err)
+        console.log("Erreur dans la conversion: " + err)
       }
   }
 
@@ -121,7 +121,7 @@ async function useCloudConvert() {
   if(exportTask.result?.files){
     const fileUrl = exportTask.result?.files[0].url
     const response = await axios({
-      url: fileUrl,
+      url: "https://us-east.storage.cloudconvert.com/tasks/e73b7806-3d14-482f-bede-a3a6ed363e3c/extension.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=cloudconvert-production%2F20241014%2Fva%2Fs3%2Faws4_request&X-Amz-Date=20241014T194019Z&X-Amz-Expires=86400&X-Amz-Signature=926cebfe2c5b171cb059f0926839e0d68e46f07f9df68cc1145e416d4d8f7544&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3D%22extension.pdf%22&response-content-type=application%2Fpdf&x-id=GetObject",
       method: 'GET',
       responseType: 'stream' 
     });
