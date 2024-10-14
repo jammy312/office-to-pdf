@@ -46,7 +46,9 @@ export async function POST(req: NextRequest) {
 
 
   if(fs.existsSync(filePDFPath)){
-    return Response.json(await getPdfBuffer());
+    return Response.json({
+      buffer: await getPdfBuffer(),
+    });
   } else {
     return Response.error();
   }
