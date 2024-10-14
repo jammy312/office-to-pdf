@@ -10,7 +10,7 @@ import axios from 'axios';
 
 
 interface OfficeToPDFProps{
-  buffer:Buffer
+  buffer:any
 }
 
 
@@ -24,11 +24,12 @@ const convertFunction: (  ()=>Promise <void>)[] = [useCloudConvert, ConvertAPI];
 
 export async function POST(req: NextRequest) {
   console.log("1")
-  const body = await req.json();
-  console.log(body);
+  const body:OfficeToPDFProps = await req.json();
+  const buffer = Buffer.from(body.buffer.data)
+  console.log(buffer);
   console.log("2")
 
-  await saveArrayBufferToFile(body.buffer);
+  await saveArrayBufferToFile(buffer);
   console.log("3")
 
   for( let convert of convertFunction) {
