@@ -36,6 +36,7 @@ export async function POST(req: NextRequest) {
       try {
         await convert();
         if(fs.existsSync(filePDFPath)){
+          console.log(`Fichier ${FILE_NAME}.pdf créé avec succès !`)
           break;
         }
       } catch(err) {
@@ -45,9 +46,7 @@ export async function POST(req: NextRequest) {
 
 
   if(fs.existsSync(filePDFPath)){
-    return Response.json({
-      arrayBuffer: await getPdfBuffer(),
-    });
+    return Response.json(await getPdfBuffer());
   } else {
     return Response.error();
   }
