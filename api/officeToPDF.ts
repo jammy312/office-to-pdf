@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
       try {
         await convert();
         if(fs.existsSync(filePDFPath)){
-          console.log(`Fichier ${FILE_NAME}.pdf créé avec succès !`)
+          console.log(`Fichier ${FILE_NAME}.pdf créé avec succès!`)
           break;
         }
       } catch(err) {
@@ -136,8 +136,7 @@ async function useCloudConvert() {
 }
 
 async function useConvertAPI() {
-  console.log("hello");
-  const convertApi = new ConvertAPI("secret_fmmmSrfEBVKfJBgh");
+  const convertApi = new ConvertAPI("secret_x1doSlswl1MUKTkd");
   await convertApi.convert("pdf",{File: filePath},"docx").then(function(result) {result.saveFiles(FILE_PATH)})
 }
 
