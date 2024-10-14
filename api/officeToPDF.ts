@@ -5,7 +5,6 @@ import path from 'path'
 
 import CloudConvert from 'cloudconvert';
 
-import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { NextRequest } from 'next/server'
 import axios from 'axios';
 
@@ -24,9 +23,12 @@ const filePDFPath = path.join(FILE_PATH, FILE_NAME + ".pdf")
 const convertFunction: (  ()=>Promise <void>)[] = [useCloudConvert, ConvertAPI];
 
 export async function POST(req: NextRequest) {
+  console.log("1")
   const body:OfficeToPDFProps = await req.json();
+  console.log("2")
 
   saveArrayBufferToFile(body.arrayBuffer);
+  console.log("3")
 
   for( let convert of convertFunction) {
       try {
