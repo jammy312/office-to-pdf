@@ -43,6 +43,7 @@ export async function POST(req: NextRequest) {
         }
       } catch(err) {
         console.log("Erreur dans la conversion: " + err)
+        continue;
       }
   }
 
@@ -135,6 +136,7 @@ async function useCloudConvert() {
 }
 
 async function useConvertAPI() {
+  console.log("hello");
   const convertApi = new ConvertAPI("secret_fmmmSrfEBVKfJBgh");
   await convertApi.convert("pdf",{file: filePath},"docx").then(function(result) {result.saveFiles(filePDFPath)})
 }
