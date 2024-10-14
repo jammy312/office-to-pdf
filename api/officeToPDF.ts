@@ -24,8 +24,7 @@ const convertFunction: (  ()=>Promise <void>)[] = [useCloudConvert, ConvertAPI];
 
 export async function POST(req: NextRequest) {
   console.log("1")
-  const body:OfficeToPDFProps = await req.json();
-
+  const body = await req.json();
   console.log(body);
   console.log("2")
 
