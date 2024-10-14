@@ -132,8 +132,9 @@ async function useCloudConvert() {
 }
 
 async function useConvertAPI() {
-  console.log("hello");
-  const convertApi = new ConvertAPI("secret_x1doSlswl1MUKTkd");
+  if(!process.env.NEXT_PUBLIC_CONVERTAPI)
+    return
+  const convertApi = new ConvertAPI(process.env.NEXT_PUBLIC_CONVERTAPI);
   const result = await convertApi.convert("pdf",{File: filePath},"docx");
 
   await result.saveFiles(FILE_PATH);
