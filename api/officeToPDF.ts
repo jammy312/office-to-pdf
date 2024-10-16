@@ -203,7 +203,5 @@ async function useAdobeDeveloper() {
       } else {
           console.log("Exception encountered while executing operation", err);
       }
-  } finally {
-      readStream?.destroy();
-  }
+  } 
 }
