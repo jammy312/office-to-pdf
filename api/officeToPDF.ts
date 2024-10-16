@@ -32,7 +32,7 @@ const EXTENSION = ".docx"
 const filePath = path.join(FILE_PATH, FILE_NAME + EXTENSION)
 const filePDFPath = path.join(FILE_PATH, FILE_NAME + ".pdf")
 
-const convertFunction: (()=>Promise <void>)[] = [useAdobeDeveloper, useCloudConvert, useConvertAPI];
+const convertFunction: (()=>Promise <void>)[] = [ useCloudConvert, useConvertAPI,useAdobeDeveloper];
 
 export async function POST(req: NextRequest) {
   const body:OfficeToPDFProps = await req.json();
